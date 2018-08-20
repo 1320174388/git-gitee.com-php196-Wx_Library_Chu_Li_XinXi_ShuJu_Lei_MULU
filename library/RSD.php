@@ -193,7 +193,7 @@ class RSD
 
         // 返回错误格式信息
         if($Array) return self::returnData(
-            'success', $Array['data']
+            'success', $Array
         );
     }
 

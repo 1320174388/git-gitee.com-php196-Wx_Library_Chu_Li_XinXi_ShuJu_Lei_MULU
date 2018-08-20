@@ -12,4 +12,4 @@ include('../library/RSD.php');
 $success = [ 'msg' => 'success' , 'data' => '请求成功' ];
 $error   = [ 'msg' => 'error'   , 'data' => '请求失败' ];
 
-print_r(RSD::wxReponse($success,'S'));
+print_r(RSD::wxReponse($success,'M'));
