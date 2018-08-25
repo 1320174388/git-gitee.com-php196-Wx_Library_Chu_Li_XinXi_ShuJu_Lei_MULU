@@ -9,7 +9,7 @@
  */
 include('../library/RSD.php');
 
-$success = [ 'msg' => 'success' , 'data' => '请求成功' ];
-$error   = [ 'msg' => 'error'   , 'data' => '请求失败' ];
+$success = [ 'msg' => 'success' , 'data' => '100544' ];
+$error   = [ 'msg' => 'error'   , 'data' => '44944' ];
 
-print_r(RSD::wxReponse($success,'M'));
+print_r(RSD::wxReponse($success,'S','1314','520'));
