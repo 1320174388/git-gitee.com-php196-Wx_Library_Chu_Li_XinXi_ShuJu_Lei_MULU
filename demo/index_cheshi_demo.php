@@ -9,7 +9,11 @@
  */
 include('../library/RSD.php');
 
-$success = [ 'msg' => 'success' , 'data' => '100544' ];
-$error   = [ 'msg' => 'error'   , 'data' => '44944' ];
+$model = RSD::returnModel(
+    '0',
+    'E10000'
+);
 
-print_r(RSD::wxReponse($success,'S','1314','520'));
+print_r($model);
+
+print_r(RSD::wxReponse($model,'S'));
