@@ -305,8 +305,7 @@ class RSD extends ExceptionCodeConfig
      * 输  入 : (string) $code => '错误码'
      * 输  入 : (string) $msg  => '提示信息'
      * 输  入 : ( data ) $data => '任意数据格式内容'
-     * 输  出 : [ 'msg' => 'success', 'data' => $data ]
-     * 输  出 : [ 'msg' => 'error',  'data' => $data ]
+     * 输  出 : [ 'code' => '错误码','msg' => '提示信息', 'data' => '返回数据' ]
      * 创  建 : 2018/08/15 17:10
      */
     public static function returnData($code='',$msg='',$data = false)
