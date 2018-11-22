@@ -276,14 +276,9 @@ class RSD extends ExceptionCodeConfig
         // 返回错误格式信息
         if(!$Array){
             // 判断错误码是否存在
-            if(($errcode!='0')&&(constant('self::'. $errcode))&&(empty($error)))
-            {
-                $msg = constant('self::'. $errcode);
-            }else {
-                $msg = $error;
-            }
+            self::errorcodeVal($errcode,$error);
             return self::returnData(
-                $errcode, $msg,false
+                $errcode, $error,false
             );
         }
         // 判断错误码是否存在
@@ -311,20 +306,11 @@ class RSD extends ExceptionCodeConfig
     public static function returnData($code='',$msg='',$data = false)
     {
         // 判断错误码是否存在
-        if(($code!='0')&&($code!='-1')){
-            // 判断错误码是否存在
-            if((constant('self::'. $code))&&(empty($msg))) {
-                $retMsg = constant('self::'. $code);
-            }else {
-                $retMsg = $msg;
-            }
-        }else{
-            $retMsg = $msg;
-        }
+        self::errorcodeVal($code,$msg);
         // 返回数据
         return [
             'code'  => $code,
-            'msg'   => $retMsg,
+            'msg'   => $msg,
             'data'  => $data
         ];
     }
@@ -341,22 +327,41 @@ class RSD extends ExceptionCodeConfig
     public static function returnJson($errCode,$retMsg,$retData=false)
     {
         // 判断错误码是否存在
-        if(($errCode!='0')&&($errCode!='-1')){
-            // 判断错误码是否存在
-            if((constant('self::'. $errCode))&&(empty($retMsg))) {
-                $msg = constant('self::'. $errCode);
-            }else {
-                $msg = $retMsg;
-            }
-        }else{
-            $msg = $retMsg;
-        }
+        self::errorcodeVal($errCode,$retMsg);
         // 返回数据
         return json_encode([
             'errCode' => $errCode,
-            'retMsg'  => $msg,
+            'retMsg'  => $retMsg,
             'retData' => $retData
         ], 320);
+    }
+
+    /**
+     * 名  称 : errorcodeVal()
+     * 功  能 : 验证错误码
+     * 输  入 : (String)  $code => '错误码';
+     * 输  入 : (String)  $msg  => '内容';
+     * 创  建 : 2018/08/15 17:10
+     */
+    private static function errorcodeVal(&$code,&$msg)
+    {
+        // 判断错误码是否存在
+        if(($code!='0')&&($code!='-1')){
+            // 拆分错误码
+            $codeArr = explode('.',$code);
+            if(array_key_exists(1,$codeArr))
+            {
+                $code = $codeArr[0];
+                if(empty($msg))
+                {
+                    $msg  = $codeArr[1];
+                }
+            }
+            // 判断错误码是否存在
+            if((constant('self::'. $code))&&(empty($msg))) {
+                $msg = constant('self::'. $code);
+            }
+        }
     }
 }
 
