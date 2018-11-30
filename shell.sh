@@ -19,3 +19,5 @@ git push mayun master
 git push gitlab master
 
 git push github master
+
+git checkout ShiGuangYu
